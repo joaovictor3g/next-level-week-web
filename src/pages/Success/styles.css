@@ -1,0 +1,26 @@
+.sucess-message {
+    background: #000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.sucess-message span {
+    border: 0;
+    color: #FFF;
+    font-size: 40px;
+
+}
+
+.sucess-message a {
+    color: green;
+    text-decoration: none;
+    font-size: 30px;
+    transition: all 0.2s;
+}
+
+.sucess-message a:hover {
+    opacity: 0.5;
+}

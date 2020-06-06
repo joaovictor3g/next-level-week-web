@@ -1,9 +1,12 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
+import React, { useEffect, useState, ChangeEvent, FormEvent, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './styles.css';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
+//import Dropzone from '../../components/Dropzone';
+import Dropzone from 'react-dropzone';
+import { FiUpload } from 'react-icons/fi';
 
 import axios from 'axios';
 
@@ -33,8 +36,12 @@ const CreatePoint = () => {
 
     const [selectedCity, setSelectedCity] = useState('0');
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+    const [selectedFile, setSelectedFile] = useState<File>();
 
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
+    const [submited, setSubmited] = useState(false);
+
+    const [selectedFileUrl, setSelectedFileUrl] = useState(''); 
 
     const [formData, setFormData] = useState({
         name: '',
@@ -137,22 +144,27 @@ const CreatePoint = () => {
         const [latitude, longitude] = selectedPosition;
         const items = selectedItems;
 
-        const data = {
-            name,
-            email,
-            whatsapp,
-            uf,
-            city,
-            latitude,
-            longitude,
-            items
+        const data = new FormData();
+
+        data.append('name', name);
+        data.append('email', email);
+        data.append('whatsapp', whatsapp);
+        data.append('uf', uf);
+        data.append('city', city);
+        data.append('latitude', String(latitude));
+        data.append('longitude', String(longitude));
+        data.append('items', items.join(', '));
+        
+        if(selectedFile) {
+            data.append('image', selectedFile);
         }
 
         try {
             await api.post('/points', data);
-
-            alert('Ponto de coleta criado');
-            history.push('/');
+            
+            setSubmited(true);  
+            
+            history.push('/success');
         
         } catch (err) {
             alert('Deu ruim')
@@ -161,10 +173,11 @@ const CreatePoint = () => {
     }
 
     return (
-        <div 
-        id="page-create-point" 
+        
+            <div 
+                id="page-create-point" 
             
-        >
+            >
             <header>
                 <img src={logo} alt="Ecoleta" />
 
@@ -176,7 +189,34 @@ const CreatePoint = () => {
 
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do <br /> ponto de coleta</h1>
-            
+                <Dropzone onDrop={
+                    useCallback(acceptedFiles => {
+                        const file = acceptedFiles[0];
+                        
+                        const fileUrl = URL.createObjectURL(file)
+                    
+                        setSelectedFileUrl(fileUrl);
+
+                        setSelectedFile(file)
+                
+                    }, [setSelectedFile])
+                }>
+                    {({ getRootProps, getInputProps }) => (
+                        <section className="dropzone">
+                            <div {...getRootProps()}>
+                              <input {...getInputProps()} accept='images/*'/>
+                              { selectedFileUrl
+                                ?  <img src={selectedFileUrl} alt="point" />
+                                :  (<p>
+                                        <FiUpload />
+                                        Imagem do estabelecimento
+                                    </p>)
+                            }
+
+                            </div>
+                        </section>
+                    )}
+                </Dropzone>
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>    
@@ -214,8 +254,9 @@ const CreatePoint = () => {
                                 />
                         </div> 
                     </div>
+                
                 </fieldset>
-
+                
                 <fieldset>
                     <legend>
                         <h2>Endereço</h2>   
@@ -288,6 +329,7 @@ const CreatePoint = () => {
             </form>
             
         </div>
+        
     );
 } 
 
