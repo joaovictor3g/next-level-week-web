@@ -3,6 +3,7 @@
 <p align="center">
 <img src="src/assets/logo.svg">
 </p>
+
 ### Project 
 - Project designed by rocketseat, which aims to register collection points. 
 
