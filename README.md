@@ -7,7 +7,9 @@
 ### Project 
 - Project designed by rocketseat, which aims to register collection points. 
 
-<img src="src/assets/home-background.svg">
+<p align="center">
+<img src="src/assets/home-background.svg" width="500px">
+</p>
 
 ### Techs
 - ReactJS + TypeScript
