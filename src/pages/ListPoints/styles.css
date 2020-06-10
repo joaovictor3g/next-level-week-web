@@ -1,0 +1,37 @@
+.principal {
+    padding: 30px 80px;
+    display: block;
+    
+}
+
+.principal .content {
+    width: 100%;
+    
+    
+}
+
+.principal .qtd-pontos{ 
+    margin-top: 50px;
+    font-size: 20px;
+
+    align-items: center;
+}
+
+.points-container {
+    width: 200px;
+    color: #322153;
+    font-weight: bold;
+    font-size: 25px;
+    display: flex;
+    
+}
+
+.points-container p {
+    margin-left: 500px;
+}
+
+.points-container img {
+    width: 400px;
+    height: 400px;
+    border-radius: 8px 0px 0px 8px;
+}
