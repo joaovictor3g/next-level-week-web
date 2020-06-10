@@ -18,6 +18,26 @@
   
   #page-home .content header {
     margin: 48px 0 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #page-home .content header button {
+    font-size: 18px;
+    background: transparent;
+    border: 0;
+    color: #322153;
+    font-family: Ubuntu;
+   
+  }
+
+  #page-home .content header .new-collect-point {
+    display: flex;
+    margin-left: 600px;
+  }
+
+  #page-home .content header button:hover {
+    opacity: 0.5;
   }
   
   #page-home .content main {

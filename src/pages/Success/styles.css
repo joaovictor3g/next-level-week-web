@@ -1,26 +1,27 @@
-.sucess-message {
-    background: #000;
+.success-message {
+    position: fixed;
+    width: 100%;
     height: 100vh;
-    display: flex;
-    justify-content: center;
+    left: 0px;
+    top: 0px;
+
+    background: #0E0A14;
+    opacity: 0.95;
     align-items: center;
-    
+    text-align: center;
 }
 
-.sucess-message span {
-    border: 0;
-    color: #FFF;
-    font-size: 40px;
-
+.success-message span {
+    position: absolute;
+    width: 324px;
+    height: 130px;
+    left: 558px;
+    top: 345px;
 }
 
-.sucess-message a {
-    color: green;
-    text-decoration: none;
+.success-message span p {
     font-size: 30px;
-    transition: all 0.2s;
-}
-
-.sucess-message a:hover {
-    opacity: 0.5;
+    color: #FFF;
+    font-weight: bold;
+    font-family: Ubuntu;
 }

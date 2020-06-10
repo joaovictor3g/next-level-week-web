@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import CreatePoint from './pages/CreatePoint';
-import Success from './pages/Success';
+//import Success from './pages/Success';
 
 const Routes = () => {
     return (
@@ -12,7 +12,7 @@ const Routes = () => {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/create-point" exact component={CreatePoint} />
-                    <Route path="/success" component={Success} />
+                    
                 </Switch>
             </BrowserRouter>
         </div>
